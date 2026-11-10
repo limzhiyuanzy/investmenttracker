@@ -4,7 +4,7 @@
 <!-- v0.26: local static offline/install package; original financial scripts unchanged. -->
 <html lang="en">
 <head>
-<meta name="quiet-banking-build" content="0aed3bc634694fa1e4fd5188">
+<meta name="quiet-banking-build" content="e1307dc41e34d01e371f3292">
 <meta name="theme-color" content="#245bb2">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<title>Quiet Banking · Investment Tracker v0.26</title>
+<title>Quiet Banking · Investment Tracker v0.27</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#eee;color:#202020;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -215,9 +215,9 @@ nav > button { margin-top:0; }
 </style>
 </head>
 <body>
-<section class="shell" aria-label="Local record storage" style="min-height:0;padding-top:10px;padding-bottom:10px"><p id="durable-status" role="status" style="overflow-wrap:anywhere">Loading saved local records… Financial saves are blocked until validation completes.</p><button type="button" class="textbutton" onclick="location.reload()">Reload safely</button><p id="pwa-status" role="status" data-state="preparing" style="overflow-wrap:anywhere">Preparing offline files… Financial storage readiness is separate.</p><button id="pwa-retry" type="button" class="textbutton">Retry/check offline files</button><details id="pwa-help"><summary>Install &amp; offline help</summary><p class="note">Use synthetic data only. On iPad Safari, use Share → Add to Home Screen on a separately approved trusted HTTPS site. First open the Home Screen app online, wait for Offline files ready, and reopen once manually if asked. Your iPadOS version and actual device test are still pending.</p><p class="note">On supported desktop/Android browsers, use the browser’s install menu. Installation is optional; it is not a backup. Save/finish work before updates, close ALL app windows, then reopen. Never reload an unfinished form. Unsaved drafts remain session-only.</p><p class="note">Local records belong to this origin/browser context. Safari and a Home Screen web app may not share storage. Clearing browser data or eviction can remove code or records. Encryption and recovery remain later gates.</p></details></section>
+<section class="shell" aria-label="Local record storage" style="min-height:0;padding-top:10px;padding-bottom:10px"><p id="durable-status" role="status" style="overflow-wrap:anywhere">Loading saved local records… Financial saves are blocked until validation completes.</p><button type="button" class="textbutton" onclick="location.reload()">Reload safely</button><p id="pwa-status" role="status" data-state="preparing" style="overflow-wrap:anywhere">Preparing offline files… Financial storage readiness is separate.</p><button id="pwa-retry" type="button" class="textbutton">Retry/check offline files</button><details id="pwa-help"><summary>Install &amp; offline help</summary><p class="note">Use synthetic data only. On iPad Safari, use Share → Add to Home Screen on a separately approved trusted HTTPS site. First open the Home Screen app online, wait for Offline files ready, and reopen once manually if asked. Your iPadOS version and actual device test are still pending.</p><p class="note">On supported desktop/Android browsers, use the browser’s install menu. Installation is optional; it is not a backup. Save/finish work before updates, close ALL app windows, then reopen. Never reload an unfinished form. Unsaved drafts remain session-only.</p><p class="note">Local records belong to this origin/browser context. Safari and a Home Screen web app may not share storage. Clearing browser data or eviction can remove code or records. Encrypted files can restore committed records and selection; passwords cannot be reset.</p></details></section>
 <main class="shell" id="durable-app" hidden inert>
-<div class="prototype">QUIET BANKING v0.26 · SYNTHETIC DEMO · LOCAL RECORDS</div>
+<div class="prototype">QUIET BANKING v0.27 · SYNTHETIC DEMO · LOCAL RECORDS</div>
 <section class="page" id="portfolio">
 <header>
 <div>
@@ -263,7 +263,7 @@ nav > button { margin-top:0; }
 <p class="muted">Transactions have their own entry form. Policy value saves also record missing assumed premiums through that policy value date only; reported value is never topped up.</p>
 <button class="primary wide" onclick="openValues()">Update values</button>
 </section>
-<p class="note">Synthetic calculation prototype. Committed financial records are saved in this browser on the same stable origin. Unsaved drafts remain session-only. No encrypted backup. Offline code readiness is shown separately above. Use synthetic data only.</p>
+<p class="note">Synthetic calculation prototype. Committed financial records are saved in this browser on the same stable origin. Unsaved drafts remain session-only. Encrypted file backup is available in Settings. Offline code readiness is separate. Use synthetic data only.</p>
 </section>
 <section class="page" id="transactions" hidden>
 <p class="eyebrow">Your records</p>
@@ -307,10 +307,10 @@ nav > button { margin-top:0; }
 <button class="secondary wide" onclick="setupPreview()">Set up / replace local records</button>
 </section>
 <section class="card">
-<h2>Backup & restore previews</h2>
-<p>Workflow simulations only. No file access, password collection, encryption or real recovery.</p>
-<button class="secondary wide" onclick="backupPreview('export')">Preview backup export</button>
-<button class="textbutton" onclick="backupPreview('restore')">Preview restore</button>
+<h2>Encrypted backup &amp; restore</h2>
+<p>Encrypted local file backup and preview-before-replace restore. Includes all committed records and the applied Custom selection; drafts are excluded.</p>
+<button class="secondary wide" onclick="backupPreview('export')">Export encrypted backup</button>
+<button class="textbutton" onclick="backupPreview('restore')">Restore encrypted backup</button>
 </section>
 <div class="font-licence"><details><summary>Embedded font licence notice</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px">Fontshare
 
@@ -452,11 +452,11 @@ https://www.fontshare.com
 <section class="page" id="setup" hidden>
 <button class="textbutton" onclick="go('settings')">‹ Data settings · keep existing portfolio</button>
 <h1>Start tracking</h1>
-<p class="note">Committed synthetic financial records use native IndexedDB; unsaved drafts remain session-only. View preferences use separate localStorage. No financial backup or recovery is implemented. No financial data leaves this app.</p>
+<p class="note">Committed synthetic financial records use native IndexedDB; unsaved drafts remain session-only. View preferences use separate localStorage. Encrypted file backup and preview-before-replace recovery are available in Settings for this local synthetic build; device verification and deployment remain separate gates. No financial data leaves this app.</p>
 <section class="card empty"><h2>Replace saved records with an empty portfolio</h2><p>Choose a tracking date, then add opening balances and stock quantities. Opening value is not historical cost. Opening is the balance BEFORE recorded opening-day activity; no return is invented.</p></section>
 <label for="setup-date">Portfolio tracking start date</label>
 <input id="setup-date" type="date" value="2025-01-01" min="2000-01-01" max="2026-06-30">
-<label class="checkbox"><input id="reset-preview" type="checkbox">I confirm replacement of ALL saved local financial records with a new empty portfolio. This cannot be undone here; no backup or restore is available.</label>
+<label class="checkbox"><input id="reset-preview" type="checkbox">I confirm replacement of ALL saved local financial records with a new empty portfolio. This cannot be undone here. Export an encrypted backup in Data settings first if needed.</label>
 <button class="primary wide" onclick="commitSetup()">Replace saved records &amp; add first holding</button>
 <p id="setup-error" role="alert"></p>
 </section>
@@ -881,6 +881,55 @@ const api={DB_NAME,DB_VERSION,STORE,KEY,MAX_CHARS,validate,hydrate,clone,create}
 if(typeof module==='object'&&module.exports)module.exports=api;else root.DurableRecords=api;
 })(typeof window==='object'?window:globalThis);
 
+</script>
+<script id="quiet-banking-backup-core">
+/* Version 1 portable backup. Native WebCrypto only. No I/O or retained key/password. */
+(function(root){
+'use strict';
+const D=typeof module==='object'&&module.exports?require('../durable-records-v025/store.cjs'):root.DurableRecords;
+const MAX_PLAIN_BYTES=8000000,MAX_FILE_BYTES=11000000,ITERATIONS=600000;
+const enc=new TextEncoder(),dec=new TextDecoder('utf-8',{fatal:true});
+function check(ok,message){if(!ok)throw Error(message);}
+function fields(x,names){check(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).sort().join(',')===names.slice().sort().join(','),'Unsupported backup format fields');}
+function preferences(p,financial){fields(p,['version','mode','excludedIds']);check(p.version===1&&['all','custom'].includes(p.mode)&&Array.isArray(p.excludedIds)&&p.excludedIds.length<=256,'Invalid selection');const known=new Set(financial.holdings.map(h=>h.id)),seen=new Set();for(let i=0;i<p.excludedIds.length;i++){check(Object.hasOwn(p.excludedIds,i),'Invalid selection');const id=p.excludedIds[i];check(typeof id==='string'&&known.has(id)&&!seen.has(id),'Invalid selection: duplicate or unknown holding');seen.add(id);}check(p.mode==='all'?seen.size===0:seen.size>0&&seen.size<known.size,'Invalid selection mode or empty subset');check(JSON.stringify(p).length<=16384,'Selection too large');return p;}
+function validate(p){fields(p,['version','financial','preferences']);check(p.version===1,'Unsupported backup payload version');D.validate(p.financial);preferences(p.preferences,p.financial);return p;}
+function password(p){check(typeof p==='string'&&p.length>=12&&p.length<=1024&&p.trim().length>=12,'Password must be 12–1024 characters; use a long unique passphrase.');}
+function b64(bytes){let s='';for(let i=0;i<bytes.length;i+=32768)s+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(s);}
+function un64(s,length,max){check(typeof s==='string'&&s.length<=max&&/^[A-Za-z0-9+/]*={0,2}$/.test(s),'Invalid canonical base64');const binary=atob(s);check(btoa(binary)===s&&(!length||binary.length===length),'Invalid base64 length or encoding');return Uint8Array.from(binary,c=>c.charCodeAt(0));}
+function aad(e){return JSON.stringify({format:e.format,version:e.version,kdf:e.kdf,iterations:e.iterations,cipher:e.cipher,salt:e.salt,iv:e.iv});}
+async function key(p,salt,usage){const material=await crypto.subtle.importKey('raw',enc.encode(p),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:ITERATIONS,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,[usage]);}
+async function encrypt(payload,p,confirm){password(p);check(p===confirm,'Passwords must match');validate(payload);const text=JSON.stringify(payload);check(text.length<=MAX_PLAIN_BYTES,'Backup plaintext too large');const bytes=enc.encode(text);check(bytes.length<=MAX_PLAIN_BYTES,'Backup plaintext too large');const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));const e={format:'quiet-banking-backup',version:1,kdf:'PBKDF2-SHA256',iterations:ITERATIONS,cipher:'AES-256-GCM',salt:b64(salt),iv:b64(iv)};e.ciphertext=b64(new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv,tagLength:128,additionalData:enc.encode(aad(e))},await key(p,salt,'encrypt'),bytes)));return JSON.stringify(e);}
+async function decrypt(text,p){password(p);check(typeof text==='string'&&text.length<=MAX_FILE_BYTES,'Backup file size too large');check(enc.encode(text).length<=MAX_FILE_BYTES,'Backup file size too large');let e;try{e=JSON.parse(text);}catch(_){throw Error('Unsupported backup format JSON');}fields(e,['format','version','kdf','iterations','cipher','salt','iv','ciphertext']);check(e.format==='quiet-banking-backup'&&e.version===1&&e.kdf==='PBKDF2-SHA256'&&e.iterations===ITERATIONS&&e.cipher==='AES-256-GCM','Unsupported backup format or parameters');const salt=un64(e.salt,16,24),iv=un64(e.iv,12,16);check(typeof e.ciphertext==='string'&&e.ciphertext.length<=4*Math.ceil((MAX_PLAIN_BYTES+16)/3),'Backup ciphertext size too large');const bytes=un64(e.ciphertext,0,MAX_FILE_BYTES);check(bytes.length>=16&&bytes.length<=MAX_PLAIN_BYTES+16,'Invalid ciphertext length');let result;try{result=await crypto.subtle.decrypt({name:'AES-GCM',iv,tagLength:128,additionalData:enc.encode(aad(e))},await key(p,salt,'decrypt'),bytes);}catch(_){throw Error('Incorrect password or damaged backup. Records unchanged.');}check(result.byteLength<=MAX_PLAIN_BYTES,'Backup plaintext too large');return validate(JSON.parse(dec.decode(result)));}
+const api={MAX_PLAIN_BYTES,MAX_FILE_BYTES,ITERATIONS,aad,preferences,validate,encrypt,decrypt};if(typeof module==='object'&&module.exports)module.exports=api;else root.EncryptedBackup=api;
+})(typeof window==='object'?window:globalThis);
+
+/* v0.27 CAS restore boundary. Financial snapshot + preference recovery marker share one transaction. */
+(function(root){
+'use strict';
+const D=typeof module==='object'&&module.exports?require('../durable-records-v025/store.cjs'):root.DurableRecords;
+const B=typeof module==='object'&&module.exports?require('./crypto.cjs'):root.EncryptedBackup;
+const MARKER='restore-preferences-v027',VIEW_KEY='quietbanking.view-preferences.v1';
+function create({indexedDB,protocol,storage,base=D.create({indexedDB,protocol})}){
+ let opened=null;
+ function open(){if(!['http:','https:'].includes(protocol))return Promise.reject(Error('Unsupported storage context'));if(!opened)opened=new Promise((resolve,reject)=>{const r=indexedDB.open(D.DB_NAME,D.DB_VERSION);r.onupgradeneeded=()=>{r.transaction.abort();};r.onerror=()=>reject(r.error||Error('Financial database unavailable'));r.onsuccess=()=>{const db=r.result;db.onversionchange=()=>{db.close();opened=null;};resolve(db);};});return opened;}
+ function transaction(db,mode){if(mode==='readonly')return db.transaction(D.STORE,mode);try{return db.transaction(D.STORE,mode,{durability:'strict'});}catch(e){if(e?.name!=='TypeError'||!/options?|durability|too many arguments|overload|signature|3 arguments/i.test(e.message||''))throw e;return db.transaction(D.STORE,mode);}}
+ function perform(mode,act){return open().then(db=>new Promise((resolve,reject)=>{let tx,result,error;try{tx=transaction(db,mode);}catch(e){reject(e);return;}const fail=e=>{error=e;try{tx.abort();}catch(_){reject(e);}};tx.oncomplete=()=>resolve(result);tx.onabort=()=>reject(error||tx.error||Error('IndexedDB transaction aborted'));tx.onerror=()=>{};try{const s=tx.objectStore(D.STORE),count=s.count(D.KEY),financial=s.get(D.KEY),markerCount=s.count(MARKER),marker=s.get(MARKER);for(const r of [count,financial,markerCount,marker])r.onerror=()=>fail(r.error||Error('Record read failed'));marker.onsuccess=()=>{try{if(count.result!==1)throw Error('Financial snapshot disappeared; reload required');D.validate(financial.result);if(markerCount.result&&marker.result===undefined)throw Error('Invalid present selection recovery marker');result=act(s,financial.result,marker.result);}catch(e){fail(e);}};}catch(e){fail(e);}}));}
+ function read(){return perform('readonly',(_s,f,m)=>{if(m!==undefined)throw Error('Restored selection recovery pending; reopen before continuing');return D.hydrate(D.clone(f));});}
+ function replace(payload,expected,guard=()=>{}){B.validate(payload);if(!Number.isSafeInteger(expected)||expected<0||expected>=Number.MAX_SAFE_INTEGER)return Promise.reject(Error('Invalid local revision'));const prepared=D.hydrate(D.clone({...payload.financial,revision:expected+1})),preferences=D.clone(payload.preferences);return perform('readwrite',(s,f,m)=>{if(m!==undefined)throw Error('Restored selection recovery pending');if(f.revision!==expected)throw Error('Revision conflict: another tab saved newer records. Reopen before restoring.');guard();s.put(prepared,D.KEY);s.put({version:1,revision:prepared.revision,preferences},MARKER);return prepared;});}
+ function project(){return perform('readwrite',(s,f,m)=>{if(m===undefined)return null;if(!m||Object.keys(m).sort().join(',')!=='preferences,revision,version'||m.version!==1||m.revision!==f.revision)throw Error('Restored selection recovery marker invalid; no records replaced');B.preferences(m.preferences,f);const raw=JSON.stringify(m.preferences);storage.setItem(VIEW_KEY,raw);if(storage.getItem(VIEW_KEY)!==raw)throw Error('Restored selection storage verification failed');s.delete(MARKER);return D.clone(m.preferences);});}
+ return {read,replace,project,load:async seed=>{const f=await base.load(seed);await project();return f;},commit:async(snapshot,expected)=>{await read();return base.commit(snapshot,expected);}};
+}
+const api={create,MARKER,VIEW_KEY};if(typeof module==='object'&&module.exports)module.exports=api;else root.BackupStorage=api;
+})(typeof window==='object'?window:globalThis);
+
+const backupOriginalCreate=window.DurableRecords.create;
+// Resolve optional WebStorage only inside the caller's guarded operation.
+// Probe reads before projection writes so read denial cannot partially project.
+const backupPreferences={getItem(key){return localStorage.getItem(key);},setItem(key,value){localStorage.getItem(key);return localStorage.setItem(key,value);}};
+window.DurableRecords.create=function(options){const base=backupOriginalCreate(options);const store=BackupStorage.create({...options,storage:backupPreferences,base});window.backupStorage=store;return store;};
+
+</script>
+<script>
 'use strict';
 // Committed synthetic financial records use native IndexedDB. Only view preferences use localStorage; no network APIs.
 const CUTOFF = '2026-06-30';
@@ -1417,11 +1466,57 @@ window.durableReady=initializeDurable();
 
 
 </script>
+<script id="quiet-banking-backup-ui">
+/* Backup UI, single-session async guards. Drafts are never exported. */
+let backupSession=null,backupSequence=0;
+const backupOldGo=go,backupOldModal=showModal,backupOldSavePreferences=saveViewPreferences;
+saveViewPreferences=function(){backupInvalidate();return backupOldSavePreferences();};
+// Setup owns financial replacement; reconcile its applied view only after its real commit.
+// Rejected/cancelled saves retain the exact prior preference. No financial writes here.
+const backupOldCommitSetup=commitSetup;
+commitSetup=async function(...args){
+ const eligible=durableState.phase==='ready'&&!durableState.pending,revision=durableState.revision;
+ const result=await backupOldCommitSetup.apply(this,args);
+ if(eligible&&durableState.revision===revision+1&&!holdings.length&&!entries.length&&!reviews.length){
+  viewPreferences={version:1,mode:'all',excludedIds:[]};saveViewPreferences();
+  // The inherited handler may already have reported a committed display failure.
+  if(durableState.phase==='ready'){
+   try{refresh();storageStatus('Setup replacement committed. '+viewPreferenceStatus);}
+   catch(error){savedDisplayFailed(error);}
+  }
+ }
+ return result;
+};
+window.addEventListener('storage',event=>{if(event.key===VIEW_KEY)backupInvalidate();});
+go=function(id){if(backupSession?.busy)return;if(currentPage==='backup-preview'&&id!=='backup-preview'){for(const key of ['backup-password','backup-confirm-password','backup-restore-password','backup-file']){const n=$('#'+key);if(n)n.value='';}backupSession=null;backupSequence++;}return backupOldGo(id);};
+showModal=function(content){if(backupSession?.busy)return;return backupOldModal(content);};
+function backupMessage(text){const n=$('#backup-message');if(n)n.textContent=text;}
+function backupInvalidate(){if(backupSession){backupSession.preview=null;backupSession.token++;const n=$('#backup-replace');if(n)n.disabled=true;const p=$('#backup-preview-result');if(p)p.textContent='Preview not loaded. Decrypt again before replacement.';}}
+function backupAvailable(){if(durableState.phase!=='ready'||durableState.pending)throw Error('Records not ready or another save is pending. Finish safely before backup.');}
+function backupActive(s,token){return backupSession===s&&s.token===token&&currentPage==='backup-preview';}
+function backupRestoreGuard(session,token,preview){if(!backupActive(session,token)||session.preview!==preview||JSON.stringify(viewPreferences)!==preview.preferences||localStorage.getItem(VIEW_KEY)!==preview.persistedPreferences){backupInvalidate();throw Error('Backup session or selection changed. Decrypt again before replacement.');}}
+function backupControls(disabled){for(const id of ['backup-export','backup-decrypt','backup-file','backup-password','backup-confirm-password','backup-restore-password','backup-replace-check']){const n=$('#'+id);if(n)n.disabled=disabled;}const n=$('#backup-replace');if(n)n.disabled=disabled||!backupSession?.preview;}
+async function backupRun(action){const s=backupSession;if(!s||s.busy)return;try{backupAvailable();}catch(e){backupMessage(e.message);return;}s.busy=true;const token=s.token;backupControls(true);try{await action(s,token);}catch(e){if(backupSession===s)backupMessage(e.message);}finally{if(backupSession===s){s.busy=false;backupControls(false);}}}
+async function backupCurrent(){const saved=await backupStorage.read();if(JSON.stringify(saved)!==JSON.stringify(DurableRecords.clone(financialSnapshot()))){backupInvalidate();throw Error('Stale tab: committed records changed. Reopen before backup or restore.');}return saved;}
+async function exportEncryptedBackup(){return backupRun(async(s,token)=>{const password=$('#backup-password').value,confirm=$('#backup-confirm-password').value,preferences=DurableRecords.clone(viewPreferences);$('#backup-password').value='';$('#backup-confirm-password').value='';backupMessage('Encrypting committed records… Keep this page open.');const financial=await backupCurrent(),text=await EncryptedBackup.encrypt({version:1,financial,preferences},password,confirm);await backupCurrent();if(!backupActive(s,token)||JSON.stringify(viewPreferences)!==JSON.stringify(preferences))throw Error('Backup session or selection changed. Export cancelled.');const url=URL.createObjectURL(new Blob([text],{type:'application/octet-stream'}));try{const link=document.createElement('a');link.href=url;link.download='quiet-banking-'+new Date().toISOString().replace(/[:.]/g,'-')+'.qbb';document.body.append(link);s.downloadLink=link;link.click();s.downloadLink=null;link.remove();}finally{setTimeout(()=>URL.revokeObjectURL(url),60000);}backupMessage('Encrypted file handed to your browser. Check the saved file and password before relying on it. Any loaded restore preview remains available.');});}
+async function previewEncryptedBackup(){backupInvalidate();return backupRun(async(s,token)=>{const file=$('#backup-file').files[0],password=$('#backup-restore-password').value;$('#backup-restore-password').value='';$('#backup-confirm-password').value='';if(!file)throw Error('Choose an encrypted .qbb backup file.');if(file.size>EncryptedBackup.MAX_FILE_BYTES)throw Error('Backup file size too large (maximum 11 MB).');const persistedPreferences=localStorage.getItem(VIEW_KEY),preferences=JSON.stringify(viewPreferences),financial=await backupCurrent();backupMessage('Decrypting and validating… No records are being changed.');const payload=await EncryptedBackup.decrypt(await file.text(),password);await backupCurrent();if(!backupActive(s,token)||JSON.stringify(viewPreferences)!==preferences||localStorage.getItem(VIEW_KEY)!==persistedPreferences)throw Error('Backup session or selection changed. Decrypt again.');s.preview={payload,revision:financial.revision,preferences,persistedPreferences};$('#backup-replace-check').checked=false;$('#backup-preview-result').textContent=payload.financial.holdings.length+' holdings · '+payload.financial.entries.length+' cash-flow records · '+payload.financial.reviews.length+' reviews. Applied selection: '+payload.preferences.mode+'. Replace ALL current records; no merge. Drafts are excluded.';backupMessage('Validated preview only. Current records and selection unchanged. Optionally export current records above, then explicitly confirm replacement.');});}
+async function replaceEncryptedBackup(){const s=backupSession;if(!s?.preview||s.busy)return;if(!$('#backup-replace-check').checked){backupMessage('Check the explicit replacement confirmation first.');return;}const preview=s.preview;return backupRun(async(session,token)=>{const guard=()=>backupRestoreGuard(session,token,preview);guard();await backupCurrent();guard();let committed=false;durableState.pending=true;try{backupMessage('Replacing records… Keep this page open.');const saved=await backupStorage.replace(preview.payload,preview.revision,guard);committed=true;session.preview=null;durableState.revision=saved.revision;holdings.splice(0,holdings.length,...saved.holdings);entries.splice(0,entries.length,...saved.entries);reviews.splice(0,reviews.length,...saved.reviews);trackingStart=saved.trackingStart;nextId=saved.nextId;try{await backupStorage.project();}catch(error){durableState.phase='blocked';throw Error('Financial records committed. Selection recovery is pending; reopen safely to retry. Do not restore again. '+error.message);}viewPreferences=DurableRecords.clone(preview.payload.preferences);viewPreferenceStatus='Restored selection saved in this browser.';reviewDraft.clear();valueDrafts.clear();transactionDrafts.clear();focusedHolding=null;valueReturn=null;txSession=null;globalTransactionDraft='';selectedHolding=null;try{refresh();backupMessage('Restored all committed financial records and the applied selection. No merge. Reload is optional, not automatic.');storageStatus('Restored local records and selection. Local database remains plain; keep your encrypted file and password safe.');}catch(error){durableState.phase='saved-display-failed';backupMessage('Financial records and selection committed; display refresh failed. Do not resubmit. Reopen safely. '+error.message);storageStatus('Restored records committed; display refresh failed. Do not resubmit. Reopen safely.');}}catch(error){if(committed){backupMessage(error.message);storageStatus(error.message);}else{backupInvalidate();backupMessage('Not restored. '+error.message+' Existing records unchanged.');}}finally{durableState.pending=false;}});}
+backupPreview=function(mode){if(backupSession?.busy||durableState.pending)return;go('backup-preview');backupSession={id:++backupSequence,token:0,busy:false,preview:null};$('#backup-content').innerHTML=`<h1>Encrypted backup &amp; restore</h1><section class="card"><p>Include every committed financial record and your applied Custom selection. No drafts, code caches or uploads. Your local database remains plain.</p><p class="notice">Use a unique long passphrase (at least 12 characters; several random words recommended). Each operation requires your password. It is not retained for later operations. Forgotten backup passwords cannot be reset. JavaScript cannot guarantee memory erasure.</p><label>Password<input id="backup-password" type="password" autocomplete="off" maxlength="1024"></label><label>Confirm password for export<input id="backup-confirm-password" type="password" autocomplete="off" maxlength="1024"></label><button id="backup-export" type="button" class="secondary wide">Export encrypted current records (optional before restore)</button><p class="note">The browser chooses or asks for the save destination. A download request does not prove the file was safely retained.</p></section><section class="card"><h2>Restore: preview, then replace</h2><label>Backup password<input id="backup-restore-password" type="password" autocomplete="off" maxlength="1024"></label><label>Encrypted backup file (up to 11 MB)<input id="backup-file" type="file" accept=".qbb,application/octet-stream" style="max-width:100%"></label><button id="backup-decrypt" type="button" class="secondary wide">Decrypt &amp; preview (no changes)</button><p id="backup-preview-result" class="readout" style="overflow-wrap:anywhere">No preview loaded.</p><label><input id="backup-replace-check" type="checkbox"> I understand this replaces ALL current financial records and the applied selection, with no merge. I have exported current records if needed.</label><button id="backup-replace" type="button" class="primary wide" disabled>Replace all records with this preview</button></section><p id="backup-message" role="status" style="overflow-wrap:anywhere">${mode==='restore'?'Choose a file and enter its password to preview.':'Enter and confirm a password to export committed records.'}</p>`;$('#backup-export').onclick=exportEncryptedBackup;$('#backup-decrypt').onclick=previewEncryptedBackup;$('#backup-replace').onclick=replaceEncryptedBackup;for(const id of ['backup-file','backup-restore-password'])$('#'+id).addEventListener('input',backupInvalidate);$('#backup-file').addEventListener('change',backupInvalidate);};
+restoreState=function(){backupMessage('Choose an encrypted file and decrypt it to preview; simulations are no longer available.');};
+for(const type of ['click','submit','input','change'])document.addEventListener(type,event=>{if(backupSession?.busy&&event.target!==backupSession.downloadLink){event.preventDefault();event.stopImmediatePropagation();}},true);
+window.addEventListener('beforeunload',event=>{if(backupSession?.busy||durableState.pending){event.preventDefault();event.returnValue='';}});
+
+// Backup coverage includes preferences: unlike ordinary financial saves,
+// backup operations must visibly reject an unavailable preference read.
+const backupOriginalCurrent=backupCurrent;
+backupCurrent=async function(){localStorage.getItem(VIEW_KEY);return backupOriginalCurrent();};
+
+</script>
 <script id="quiet-banking-pwa-client">
 /* Quiet Banking isolated code-cache/install client. Static build status only. */
 (() => {
  'use strict';
- const BUILD = '0aed3bc634694fa1e4fd5188';
+ const BUILD = 'e1307dc41e34d01e371f3292';
  const status = document.querySelector('#pwa-status');
  const retry = document.querySelector('#pwa-retry');
  let registration = null, sequence = 0, running = false, installFailed = false;
