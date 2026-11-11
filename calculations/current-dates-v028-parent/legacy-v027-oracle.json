@@ -1,0 +1,847 @@
+{
+  "version": 1,
+  "financial": {
+    "version": 1,
+    "revision": 6,
+    "trackingStart": "2025-01-01",
+    "nextId": 3,
+    "holdings": [
+      {
+        "id": "dbs",
+        "name": "DBS Group",
+        "type": "Stock",
+        "value": 18000,
+        "units": 400,
+        "price": 45,
+        "currency": "SGD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-05-31",
+        "unitsDate": "2026-05-31",
+        "fx": 1,
+        "closed": false,
+        "history": [],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 18000,
+            "units": 400,
+            "price": 45,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        ],
+        "revision": 0,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 18000,
+          "price": 45,
+          "units": 400,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        },
+        "quantityConfirmations": [
+          {
+            "date": "2025-01-01",
+            "units": 400,
+            "source": "opening",
+            "includedEntryIds": []
+          },
+          {
+            "date": "2026-05-31",
+            "units": 400,
+            "source": "synthetic confirmed quantity",
+            "includedEntryIds": []
+          }
+        ]
+      },
+      {
+        "id": "ssb",
+        "name": "SSB \u00b7 Jan 2025",
+        "type": "Savings bond",
+        "value": 0,
+        "currency": "SGD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-06-30",
+        "fx": 1,
+        "closed": true,
+        "history": [
+          "2026-06-30: Closed, confirmed zero residual value. History retained."
+        ],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 20000,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          {
+            "date": "2026-06-30",
+            "value": 0,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "manual closure"
+          }
+        ],
+        "revision": 1,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 20000,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        },
+        "closedDate": "2026-06-30"
+      },
+      {
+        "id": "tbill",
+        "name": "T-bill \u00b7 Apr 2026",
+        "type": "Treasury bill",
+        "value": 15000,
+        "currency": "SGD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-05-31",
+        "fx": 1,
+        "closed": false,
+        "history": [],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 15000,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        ],
+        "revision": 0,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 15000,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        }
+      },
+      {
+        "id": "ilp",
+        "name": "Investment policy",
+        "type": "ILP",
+        "value": 32000,
+        "currency": "SGD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-05-31",
+        "fx": 1,
+        "closed": false,
+        "history": [
+          "Future-only schedule saved effective 2026-07-01: [1200,\"Quarterly\",\"2028-06-30\"]. Existing corrected/skipped entries preserved."
+        ],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 32000,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        ],
+        "revision": 0,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 32000,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        },
+        "policy": {
+          "start": "2024-01-01",
+          "premium": 1000,
+          "frequency": "Monthly",
+          "end": "",
+          "future": {
+            "effective": "2026-07-01",
+            "premium": 1200,
+            "frequency": "Quarterly",
+            "end": "2028-06-30"
+          }
+        }
+      },
+      {
+        "id": "savings",
+        "name": "Savings account",
+        "type": "Bank account",
+        "value": 40010,
+        "currency": "SGD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-06-30",
+        "fx": 1,
+        "closed": false,
+        "history": [],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 40000,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture",
+            "nativeValue": 40000,
+            "includedEntryIds": [
+              "manual3"
+            ]
+          },
+          {
+            "date": "2026-06-30",
+            "value": 40010,
+            "nativeValue": 40010,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "actual balance after transaction",
+            "includedEntryIds": [
+              "manual3",
+              "transaction-1"
+            ]
+          }
+        ],
+        "revision": 0,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 40000,
+          "nativeValue": 40000,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        }
+      },
+      {
+        "id": "endowus",
+        "name": "Endowus \u00b7 Core",
+        "type": "Cash portfolio",
+        "value": 25000,
+        "currency": "SGD",
+        "provider": "Synthetic platform",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-05-31",
+        "fx": 1,
+        "closed": false,
+        "history": [],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 25000,
+            "fx": 1,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        ],
+        "revision": 0,
+        "openingFX": 1,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 25000,
+          "fx": 1,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        }
+      },
+      {
+        "id": "usd",
+        "name": "USD stock \u00b7 Example Co",
+        "type": "Stock",
+        "value": 13500,
+        "units": 110,
+        "price": 100,
+        "currency": "USD",
+        "provider": "Synthetic account",
+        "tracking": "2025-01-01",
+        "valueDate": "2026-05-31",
+        "unitsDate": "2026-06-30",
+        "fx": 1.35,
+        "closed": false,
+        "history": [
+          "2026-06-30: quantity correction 100 \u2192 110. Reason: Synthetic compatibility fixture quantity correction. No cash flow."
+        ],
+        "valuations": [
+          {
+            "date": "2026-05-31",
+            "value": 13500,
+            "units": 100,
+            "price": 100,
+            "fx": 1.35,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        ],
+        "revision": 1,
+        "openingFX": 1.35,
+        "opening": {
+          "date": "2025-01-01",
+          "value": 13500,
+          "price": 100,
+          "units": 100,
+          "fx": 1.35,
+          "boundary": "BOD",
+          "source": "synthetic baseline"
+        },
+        "quantityConfirmations": [
+          {
+            "date": "2025-01-01",
+            "units": 100,
+            "source": "opening",
+            "includedEntryIds": []
+          },
+          {
+            "date": "2026-05-31",
+            "units": 100,
+            "source": "synthetic confirmed quantity",
+            "includedEntryIds": []
+          },
+          {
+            "date": "2026-06-30",
+            "units": 110,
+            "source": "manual quantity correction: Synthetic compatibility fixture quantity correction",
+            "includedEntryIds": []
+          }
+        ]
+      }
+    ],
+    "entries": [
+      {
+        "id": "manual1",
+        "holding": "dbs",
+        "kind": "Dividend",
+        "date": "2026-06-12",
+        "amount": 180,
+        "source": "manual",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": [],
+        "treatment": "paid-out"
+      },
+      {
+        "id": "manual2",
+        "holding": "endowus",
+        "kind": "Contribution",
+        "date": "2026-06-05",
+        "amount": 500,
+        "source": "manual",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "manual3",
+        "holding": "savings",
+        "kind": "Interest",
+        "date": "2026-05-31",
+        "amount": 85,
+        "source": "manual",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-01-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-01-01",
+        "due": "2024-01-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-02-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-02-01",
+        "due": "2024-02-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-03-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-03-01",
+        "due": "2024-03-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-04-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-04-01",
+        "due": "2024-04-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-05-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-05-01",
+        "due": "2024-05-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-06-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-06-01",
+        "due": "2024-06-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-07-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-07-01",
+        "due": "2024-07-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-08-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-08-01",
+        "due": "2024-08-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-09-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-09-01",
+        "due": "2024-09-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-10-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-10-01",
+        "due": "2024-10-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-11-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-11-01",
+        "due": "2024-11-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2024-12-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2024-12-01",
+        "due": "2024-12-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-01-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-01-01",
+        "due": "2025-01-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-02-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-02-01",
+        "due": "2025-02-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-03-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-03-01",
+        "due": "2025-03-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-04-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-04-01",
+        "due": "2025-04-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-05-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-05-01",
+        "due": "2025-05-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-06-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-06-01",
+        "due": "2025-06-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-07-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-07-01",
+        "due": "2025-07-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-08-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-08-01",
+        "due": "2025-08-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-09-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-09-01",
+        "due": "2025-09-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-10-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-10-01",
+        "due": "2025-10-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-11-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-11-01",
+        "due": "2025-11-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2025-12-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2025-12-01",
+        "due": "2025-12-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2026-01-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2026-01-01",
+        "due": "2026-01-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2026-02-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2026-02-01",
+        "due": "2026-02-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2026-03-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2026-03-01",
+        "due": "2026-03-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "premium-ilp-2026-04-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2026-04-01",
+        "due": "2026-04-01",
+        "amount": 900,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": [
+          "Correction: 2026-04-01, 1000 SGD, FX 1 \u2192 2026-04-01, 900, FX 1. Reason: Synthetic compatibility fixture corrected amount. Source remains auto."
+        ]
+      },
+      {
+        "id": "premium-ilp-2026-05-01",
+        "holding": "ilp",
+        "kind": "Premium",
+        "date": "2026-05-01",
+        "due": "2026-05-01",
+        "amount": 1000,
+        "source": "auto",
+        "currency": "SGD",
+        "fx": 1,
+        "active": false,
+        "history": [
+          "Skipped: Synthetic compatibility fixture skip. Original due 2026-05-01 retained."
+        ]
+      },
+      {
+        "id": "transaction-1",
+        "holding": "savings",
+        "kind": "Deposit",
+        "date": "2026-06-30",
+        "amount": 10,
+        "source": "manual",
+        "currency": "SGD",
+        "fx": 1,
+        "active": true,
+        "history": []
+      },
+      {
+        "id": "final2",
+        "holding": "ssb",
+        "kind": "Final proceeds",
+        "date": "2026-06-30",
+        "amount": 20000,
+        "fx": 1,
+        "currency": "SGD",
+        "source": "manual",
+        "active": true,
+        "final": true,
+        "history": [
+          "Created once by closure."
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "date": "2026-05-31",
+        "holdings": [
+          "dbs",
+          "ssb",
+          "tbill",
+          "ilp",
+          "savings",
+          "endowus",
+          "usd"
+        ],
+        "snapshots": {
+          "dbs": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 18000,
+            "units": 400,
+            "price": 45,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          "ssb": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 20000,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          "tbill": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 15000,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          "ilp": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 32000,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          "savings": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 40000,
+            "boundary": "EOD",
+            "source": "synthetic fixture",
+            "nativeValue": 40000,
+            "includedEntryIds": [
+              "manual3"
+            ]
+          },
+          "endowus": {
+            "fx": 1,
+            "date": "2026-05-31",
+            "value": 25000,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          },
+          "usd": {
+            "fx": 1.35,
+            "date": "2026-05-31",
+            "value": 13500,
+            "units": 100,
+            "price": 100,
+            "boundary": "EOD",
+            "source": "synthetic fixture"
+          }
+        },
+        "source": "completed synthetic seed review"
+      }
+    ]
+  },
+  "preferences": {
+    "version": 1,
+    "mode": "custom",
+    "excludedIds": [
+      "dbs"
+    ]
+  }
+}
