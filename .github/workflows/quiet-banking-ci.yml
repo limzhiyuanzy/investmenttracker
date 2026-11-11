@@ -1,0 +1,57 @@
+name: Quiet Banking PR checks
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quiet-banking-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  non-browser:
+    name: Build and portable tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      TMPDIR: ${{ runner.temp }}
+    steps:
+      - name: Check out exact PR head without saved credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up tested Node version
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26.12.1'
+          package-manager-cache: false
+      - name: Set up tested Python version
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14.9'
+      - name: Verify source identity and CI guardrails
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          python -m unittest discover -s ci -p "test_*.py" -v
+      - name: Rebuild and run non-browser regression gate
+        run: python calculations/current-dates-v028/run-gates.py --label "ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Verify reviewed bytes after rebuilding
+        run: |
+          python ci/verify_assets.py
+          git diff --exit-code -- app/quiet-banking-v0.28 calculations/current-dates-v028
+      - name: Retain raw gate logs and receipts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: quiet-banking-gate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: calculations/current-dates-v028/gates/ci-*
+          retention-days: 7
+          if-no-files-found: warn

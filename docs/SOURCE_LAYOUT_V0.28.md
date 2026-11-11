@@ -51,4 +51,4 @@ Generated v0.28 assets and runtime modules must match their reviewed originals. 
 - A later release PR targets the confirmed publishing branch and promotes only the exact six reviewed static app files.
 - Existing-policy schedule editing remains read-only in v0.28. New post-June records may be refused by unchanged v0.27; reverting code is not a data rollback.
 
-See `CI_PROPOSAL_V0.28.md` for the inactive CI proposal and its unresolved hosted/browser portability boundaries.
+See `CI_CHECKS_V0.28.md` for the implemented non-browser workflow definition and its acceptance limits. `CI_PROPOSAL_V0.28.md` is the historical planning record; browser/native execution remains excluded.

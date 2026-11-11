@@ -1,6 +1,6 @@
 # Quiet Banking: proposed pull-request checks
 
-Status: local proposal only. No workflow has been installed, pushed or run on GitHub. No deployment or billing settings have been changed.
+Status: historical planning proposal. The implemented workflow definition is documented in `CI_CHECKS_V0.28.md`; actual hosted execution must be verified from its exact GitHub PR/run. This proposal itself grants no deployment or billing-setting authority.
 
 ## Purpose
 

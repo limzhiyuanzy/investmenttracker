@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "files": {
+    "app/quiet-banking-v0.28/icon-180.png": "fec04371e4e3593012cc7edda2c1b3bdad90fca7d84d8c99f57b9974140637f8",
+    "app/quiet-banking-v0.28/icon-192.png": "d5e9cb27cde17489a875d4de31db87a78b8180707f5d8b5f525e54390237aac7",
+    "app/quiet-banking-v0.28/icon-512.png": "7c5677b7487cb4744a1f1ad6f165f62889064fb57b56652ffef5559d7b9a536f",
+    "app/quiet-banking-v0.28/index.html": "f1255a2caf4b66b5ceb7220571259cc9f5bc36aa5f4203f34f11a592b9abecd2",
+    "app/quiet-banking-v0.28/manifest.webmanifest": "7f4549c20352c364ebeae1b577aa5507801d3d815c5c0c9b34a7007fb2e665d7",
+    "app/quiet-banking-v0.28/sw.js": "8d4a19ceea8fd121cf2840029d79288d33c68c005c92cd9cb4ea73405b359c6f",
+    "calculations/current-dates-v028/cashflow-engine.cjs": "acac5462608c0e27d08b2c4a3c31e97ba6270e2973e1eabe116d57c6242db2ae",
+    "calculations/current-dates-v028/crypto.cjs": "66c434c9176254b7ec740947f2d9569dce7c99ecf16e1fdc92922b833d3b7294",
+    "calculations/current-dates-v028/durable-integration.js": "7e9f045edd63099129c758ac219830ba89e900f765fd04915c32b4840853d13f",
+    "calculations/current-dates-v028/storage.cjs": "3b49765e71a65b532e770ba9f609d5404fe64eba3cd810399ccd59f418a3b0ba",
+    "calculations/current-dates-v028/store.cjs": "6292e3f902a35588fc8cf4551ecda6dced5186595fe4303b61b3979d7f9b2b5b",
+    "icon-180.png": "fec04371e4e3593012cc7edda2c1b3bdad90fca7d84d8c99f57b9974140637f8",
+    "icon-192.png": "d5e9cb27cde17489a875d4de31db87a78b8180707f5d8b5f525e54390237aac7",
+    "icon-512.png": "7c5677b7487cb4744a1f1ad6f165f62889064fb57b56652ffef5559d7b9a536f",
+    "index.html": "1dd20b86620c2a25283697aa0179587386b2ab751a7bb655aa93778c78b58aea",
+    "manifest.webmanifest": "7f4549c20352c364ebeae1b577aa5507801d3d815c5c0c9b34a7007fb2e665d7",
+    "sw.js": "54f34f63c54f789650386e949b03d8b36860ae03cdb889754abc9e592b05b743"
+  }
+}
