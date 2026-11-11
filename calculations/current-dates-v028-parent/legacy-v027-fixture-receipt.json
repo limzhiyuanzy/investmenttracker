@@ -1,0 +1,20 @@
+{
+  "sourceHTMLSHA256": "1dd20b86620c2a25283697aa0179587386b2ab751a7bb655aa93778c78b58aea",
+  "file": "calculations/current-dates-v028-parent/legacy-v027.qbb",
+  "fileSHA256": "2990b9e8a3b6c3b8d139a2e1d55cc4914743b372ec12e2ed78339a992bb7bae3",
+  "syntheticTestPassword": "Synthetic parent legacy fixture only violet cedar river",
+  "oracle": "calculations/current-dates-v028-parent/legacy-v027-oracle.json",
+  "revision": 6,
+  "features": [
+    "bank confirmation captures covered transaction IDs",
+    "stock quantity confirmation and history",
+    "saved July future policy segment",
+    "stable skipped policy occurrence",
+    "corrected policy occurrence retains due identity",
+    "closed holding one final proceeds and history",
+    "applied Custom selection",
+    "actual old-browser encrypted download",
+    "old decrypt matches independently read complete native snapshot"
+  ],
+  "nodeOrNativeScope": "Actual old v0.27 UI/native IndexedDB/export; not owner iPad data or a successor acceptance result"
+}

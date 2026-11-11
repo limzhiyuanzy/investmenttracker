@@ -1,0 +1,10 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const D=require(process.env.STORE_MODULE?path.resolve(process.env.STORE_MODULE):'../durable-records-v025/store.cjs'),oracle=JSON.parse(fs.readFileSync(path.join(__dirname,'../current-dates-v028-parent/legacy-v027-oracle.json')));
+test('complete old snapshot with future schedule accepted unchanged',()=>{const f=structuredClone(oracle.financial),before=JSON.stringify(f);D.validate(f);assert.equal(JSON.stringify(f),before)});
+test('current-day economic record structurally readable independently of clock',()=>{const f=structuredClone(oracle.financial);f.entries.push({id:'new-current-day',holding:'savings',kind:'Deposit',date:'2026-11-11',amount:12,source:'manual',currency:'SGD',fx:1,active:true,history:[]});assert.doesNotThrow(()=>D.validate(f))});
+test('July economic record structurally readable',()=>{const f=structuredClone(oracle.financial);f.entries.push({id:'new-July-day',holding:'savings',kind:'Deposit',date:'2026-07-01',amount:12,source:'manual',currency:'SGD',fx:1,active:true,history:[]});assert.doesNotThrow(()=>D.validate(f))});
+test('newer schema rejected',()=>assert.throws(()=>D.validate({...oracle.financial,version:2}),/unsupported version/));
+test('valid empty remains valid',()=>assert.doesNotThrow(()=>D.validate({version:1,revision:9,trackingStart:'2025-01-01',nextId:1,holdings:[],entries:[],reviews:[]})));
+test('dense arrays and malformed nested data remain enforced',()=>{const f=structuredClone(oracle.financial);delete f.entries[0];assert.throws(()=>D.validate(f),/dense/);const g=structuredClone(oracle.financial);g.holdings[0].opening.value=Infinity;assert.throws(()=>D.validate(g),/nonfinite/)});
+if(process.env.BACKUP_MODULE)test('authentic old native encrypted file decrypts exactly to independent parent oracle',async()=>{const B=require(path.resolve(process.env.BACKUP_MODULE)),r=JSON.parse(fs.readFileSync(path.join(__dirname,'../current-dates-v028-parent/legacy-v027-fixture-receipt.json')));assert.deepEqual(await B.decrypt(fs.readFileSync(r.file,'utf8'),r.syntheticTestPassword),oracle)});

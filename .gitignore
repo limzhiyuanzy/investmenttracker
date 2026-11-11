@@ -1,0 +1,23 @@
+# Local preparation and generated verification output
+/.local-preparation/
+/calculations/current-dates-v028/gates/
+/calculations/current-dates-v028/html-delta.diff
+__pycache__/
+*.py[cod]
+
+# Device data, recovery exports and credentials are not source imports
+.env
+.env.*
+*.qbb
+# Individually reviewed synthetic compatibility fixture, not a user backup.
+!/calculations/current-dates-v028-parent/legacy-v027.qbb
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+id_ed25519
+id_rsa
+
+# Future synthetic recovery fixtures require explicit per-file review;
+# do not remove these protections merely to make a broad add succeed.
