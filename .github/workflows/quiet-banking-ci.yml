@@ -19,7 +19,6 @@ jobs:
     timeout-minutes: 15
     env:
       PYTHONDONTWRITEBYTECODE: '1'
-      TMPDIR: ${{ runner.temp }}
     steps:
       - name: Check out exact PR head without saved credentials
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -38,10 +37,13 @@ jobs:
       - name: Verify source identity and CI guardrails
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          TMPDIR: ${{ runner.temp }}
         run: |
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
           python -m unittest discover -s ci -p "test_*.py" -v
       - name: Rebuild and run non-browser regression gate
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: python calculations/current-dates-v028/run-gates.py --label "ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
       - name: Verify reviewed bytes after rebuilding
         run: |

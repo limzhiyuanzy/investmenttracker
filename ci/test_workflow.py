@@ -30,6 +30,13 @@ class WorkflowPolicy(unittest.TestCase):
   self.assertNotIn('--native',s)
   self.assertIn('TMPDIR: ${{ runner.temp }}',s)
   self.assertIn('timeout-minutes: 15',s)
+ def test_runner_context_is_limited_to_step_environment(self):
+  s=self.source();job_env=re.search(r'(?m)^    env:\n((?:^      [^\n]*\n)+)',s)
+  self.assertIsNotNone(job_env)
+  assert job_env is not None
+  self.assertNotIn('runner.',job_env.group(1),'GitHub does not allow runner context in jobs.<job_id>.env')
+  step_envs=re.findall(r'(?m)^        env:\n((?:^          [^\n]*\n)+)',s)
+  self.assertEqual(sum('TMPDIR: ${{ runner.temp }}' in env for env in step_envs),2,'Both test steps need their own valid runner-scoped temporary directory')
  def test_raw_gate_evidence_is_retained_on_failure(self):
   s=self.source();self.assertIn('if: ${{ !cancelled() }}',s)
   self.assertIn('path: calculations/current-dates-v028/gates/ci-*',s)
