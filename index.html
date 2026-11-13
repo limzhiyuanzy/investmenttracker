@@ -4,7 +4,7 @@
 <!-- v0.26: local static offline/install package; original financial scripts unchanged. -->
 <html lang="en">
 <head>
-<meta name="quiet-banking-build" content="c9804128b4dcc8e9acb4bbdd">
+<meta name="quiet-banking-build" content="ca3a6cd70613351f6b916829">
 <meta name="theme-color" content="#245bb2">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<title>Quiet Banking · Investment Tracker v0.28</title>
+<title>Quiet Banking · Investment Tracker v0.29</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#eee;color:#202020;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -215,9 +215,9 @@ nav > button { margin-top:0; }
 </style>
 </head>
 <body>
-<section class="shell" aria-label="Local record storage" style="min-height:0;padding-top:10px;padding-bottom:10px"><p id="durable-status" role="status" style="overflow-wrap:anywhere">Loading saved local records… Financial saves are blocked until validation completes.</p><button type="button" class="textbutton" onclick="location.reload()">Reload safely</button><p id="pwa-status" role="status" data-state="preparing" style="overflow-wrap:anywhere">Preparing offline files… Financial storage readiness is separate.</p><button id="pwa-retry" type="button" class="textbutton">Retry/check offline files</button><details id="pwa-help"><summary>Install &amp; offline help</summary><p class="note">Use synthetic data only. On iPad Safari, use Share → Add to Home Screen on a separately approved trusted HTTPS site. First open the Home Screen app online, wait for Offline files ready, and reopen once manually if asked. Your iPadOS version and actual device test are still pending.</p><p class="note">On supported desktop/Android browsers, use the browser’s install menu. Installation is optional; it is not a backup. Save/finish work before updates, close ALL app windows, then reopen. Never reload an unfinished form. Unsaved drafts remain session-only.</p><p class="note">Local records belong to this origin/browser context. Safari and a Home Screen web app may not share storage. Clearing browser data or eviction can remove code or records. Encrypted files can restore committed records and selection; passwords cannot be reset.</p></details></section>
+<section class="shell" aria-label="Local record storage" style="min-height:0;padding-top:10px;padding-bottom:10px"><p id="durable-status" role="status" style="overflow-wrap:anywhere">Loading saved local records… Financial saves are blocked until validation completes.</p><button type="button" class="textbutton" onclick="location.reload()">Reload safely</button><p id="pwa-status" role="status" data-state="preparing" style="overflow-wrap:anywhere">Preparing offline files… Financial storage readiness is separate.</p><button id="pwa-retry" type="button" class="textbutton">Verify offline status</button> <button id="pwa-update" type="button" class="textbutton">Check for updates</button> <button id="pwa-repair" type="button" class="textbutton">Repair offline files</button><p id="pwa-update-status" role="status" data-state="idle" style="overflow-wrap:anywhere">Update discovery has not run.</p><details id="pwa-help"><summary>Install &amp; offline help</summary><p class="note">Use synthetic data only. On iPad Safari, use Share → Add to Home Screen on a separately approved trusted HTTPS site. First open the Home Screen app online, wait for Offline files ready, and reopen once manually if asked. Your iPadOS version and actual device test are still pending.</p><p class="note">On supported desktop/Android browsers, use the browser’s install menu. Installation is optional; it is not a backup. Save/finish work before updates, close ALL app windows, then reopen. Never reload an unfinished form. Unsaved drafts remain session-only.</p><p class="note">Local records belong to this origin/browser context. Safari and a Home Screen web app may not share storage. Clearing browser data or eviction can remove code or records. Encrypted files can restore committed records and selection; passwords cannot be reset.</p></details></section>
 <main class="shell" id="durable-app" hidden inert>
-<div class="prototype">QUIET BANKING v0.28 · SYNTHETIC DEMO · LOCAL RECORDS</div>
+<div class="prototype">QUIET BANKING v0.29 · SYNTHETIC DEMO · LOCAL RECORDS</div>
 <section class="page" id="portfolio">
 <header>
 <div>
@@ -1532,78 +1532,103 @@ backupCurrent=async function(){localStorage.getItem(VIEW_KEY);return backupOrigi
 
 </script>
 <script id="quiet-banking-pwa-client">
-/* Quiet Banking isolated code-cache/install client. Static build status only. */
+/* Quiet Banking v0.29 isolated static-code controls. No financial storage. */
 (() => {
  'use strict';
- const BUILD = 'c9804128b4dcc8e9acb4bbdd';
+ const BUILD = 'ca3a6cd70613351f6b916829';
  const status = document.querySelector('#pwa-status');
+ const updateStatus = document.querySelector('#pwa-update-status');
  const retry = document.querySelector('#pwa-retry');
- let registration = null, sequence = 0, running = false, installFailed = false;
- const show = (state, text) => { status.dataset.state = state; status.textContent = text; };
- function ask(worker) {
+ const update = document.querySelector('#pwa-update');
+ const repair = document.querySelector('#pwa-repair');
+ let registration = null, sequence = 0, checking = false, repairing = false, installFailed = false;
+ const show = (node, state, text) => { node.dataset.state = state; node.textContent = text; };
+ const bounded = (promise, ms) => new Promise((resolve, reject) => {
+  const timer = setTimeout(() => reject(Error('timeout')), ms);
+  Promise.resolve(promise).then(v => { clearTimeout(timer); resolve(v); }, e => { clearTimeout(timer); reject(e); });
+ });
+ function ask(worker, type = 'GET_STATUS') {
   return new Promise((resolve, reject) => {
    const channel = new MessageChannel();
-   const timer = setTimeout(() => { channel.port1.close(); reject(Error('Static status timed out')); }, 4000);
+   const timer = setTimeout(() => { channel.port1.close(); reject(Error('timeout')); }, 10000);
    channel.port1.onmessage = event => { clearTimeout(timer); channel.port1.close(); resolve(event.data); };
-   try { worker.postMessage({type: 'GET_STATUS'}, [channel.port2]); }
-   catch (error) { clearTimeout(timer); channel.port1.close(); reject(error); }
+   try { worker.postMessage({type}, [channel.port2]); }
+   catch (e) { clearTimeout(timer); channel.port1.close(); reject(e); }
   });
  }
- async function check() {
-  const turn = ++sequence;
+ function lifecycle() {
+  if (registration?.waiting) show(updateStatus, 'waiting', 'Update waiting. Finish or save work, close ALL app windows, then reopen. Unsaved drafts are session-only.');
+  else if (registration?.installing) show(updateStatus, 'preparing', 'Preparing a verified update. Current work is not reloaded.');
+  else if (installFailed) show(updateStatus, 'failed', 'Update install failed. Previous active code, if usable, is retained. Check again online.');
+ }
+ async function readiness() {
+  const turn = ++sequence, controller = navigator.serviceWorker.controller;
   try {
-   if (installFailed) { show('failed', 'Offline install/update failed. Previous active code, if any, is retained. Retry/check while online.'); return; }
-   const controller = navigator.serviceWorker.controller;
-   if (!controller) {
-    const installed = registration?.active || registration?.waiting;
-    show(installed ? 'reopen' : 'preparing', installed ? 'Reopen once to finish offline setup. Do not reload an unfinished form.' : 'Preparing offline files. Keep this page open online.');
-    return;
-   }
-   if (controller.scriptURL !== new URL('./sw.js', location.href).href) {
-    show('reopen', 'Reopen once to finish offline setup for this app directory. Do not reload an unfinished form.'); return;
-   }
+   if (!controller) { show(status, registration?.active ? 'reopen' : 'preparing', registration?.active ? 'Reopen after finishing work to finish offline setup.' : 'Preparing offline files. Keep online.'); return; }
+   if (controller.scriptURL !== new URL('./sw.js', location.href).href) { show(status, 'mismatch', 'Another app directory controls this page. Finish work and reopen from this app address.'); return; }
    const result = await ask(controller);
-   if (turn !== sequence || navigator.serviceWorker.controller !== controller) return;
-   if (result?.build !== BUILD) { show('mismatch', 'Offline files not ready for this page version. Finish or save work, close ALL app windows, then reopen.'); return; }
-   if (result.state !== 'complete') { show('failed', 'Offline files failed verification. Stay online and retry/check. Financial saving is separate.'); return; }
-   if (registration?.waiting) show('waiting', 'Offline files ready for current version. Update waiting: finish or save work, close ALL app windows, then reopen.');
-   else show('ready', 'Offline files ready for this version. Local records are separate; this is not a backup.');
-  } catch (_) { if (turn === sequence) show('failed', 'Offline setup/status failed. Keep working online; retry/check without reloading your form.'); }
+   if (turn !== sequence || controller !== navigator.serviceWorker.controller) return;
+   if (result?.build !== BUILD) show(status, 'mismatch', 'Page and controlling build differ. Finish work, close ALL app windows, then reopen.');
+   else if (result.state === 'complete') show(status, 'ready', 'Offline files ready for this version. Financial saving is separate; this is not a backup.');
+   else show(status, 'failed', 'Offline files failed verification. Stay online and use Repair offline files. Financial records are separate.');
+  } catch (_) { if (turn === sequence) show(status, 'failed', 'Offline readiness could not be verified. Keep online; retry status without reloading work.'); }
+  lifecycle();
  }
  function watch(worker) {
   if (!worker) return;
   worker.addEventListener('statechange', () => {
-   if (worker.state === 'redundant') { installFailed = true; void check(); }
-   else void check();
+   if (worker.state === 'redundant') installFailed = true;
+   lifecycle(); void readiness();
   });
  }
- async function start() {
-  if (running) return;
-  if (!['http:', 'https:'].includes(location.protocol) || !window.isSecureContext || !('serviceWorker' in navigator) || !('caches' in window) || !window.MessageChannel) {
-   show('unsupported', 'Offline install unavailable in this context. A supported browser and trusted HTTPS are required (local loopback is test-only).'); return;
-  }
-  running = true; installFailed = false; retry.disabled = true;
-  show('preparing', 'Preparing offline files. Keep this page open online.');
-  try {
-   // Relative to the document directory at root or any stable nested path.
-   registration = await navigator.serviceWorker.register('./sw.js', {scope: './', updateViaCache: 'none'});
-   watch(registration.installing);
-   registration.addEventListener('updatefound', () => watch(registration.installing));
-   await check();
-   // Bounded initial observation, never automatic reload or draft replacement.
-   for (let i = 0; i < 16 && status.dataset.state === 'preparing'; i++) {
-    await new Promise(resolve => setTimeout(resolve, 500)); await check();
-   }
-   if (status.dataset.state === 'preparing') show('preparing', 'Offline files still preparing. Keep online and use Retry/check.');
-  } catch (_) { show('failed', 'Offline setup failed. Financial saving is separate. Keep online and retry/check; no records were cleared.'); }
-  finally { running = false; retry.disabled = false; }
+ async function setup() {
+  if (registration) return registration;
+  registration = await bounded(navigator.serviceWorker.register('./sw.js', {scope: './', updateViaCache: 'none'}), 6000);
+  watch(registration.installing);
+  registration.addEventListener('updatefound', () => { installFailed = false; watch(registration.installing); lifecycle(); });
+  return registration;
  }
- retry.addEventListener('click', () => { void start(); });
- document.addEventListener('visibilitychange', () => { if (!document.hidden && registration) void check(); });
- if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('controllerchange', () => { void check(); });
- void start();
+ async function checkUpdates() {
+  if (checking) return;
+  checking = true; update.disabled = true;
+  show(updateStatus, 'checking', 'Checking the server for app updates… Offline readiness is separate.');
+  try {
+   const reg = await setup(); installFailed = false;
+   await bounded(reg.update(), 6000);
+   show(updateStatus, 'checked', 'Update discovery completed. No replacement is waiting yet; this does not guarantee a newer release exists.');
+   lifecycle();
+  } catch (_) { show(updateStatus, 'failed', 'Update discovery failed or timed out. Keep working; check again online. Current offline readiness is shown separately.'); }
+  finally { checking = false; update.disabled = false; void readiness(); }
+ }
+ async function repairFiles() {
+  if (repairing) return;
+  repairing = true; repair.disabled = true; ++sequence;
+  show(status, 'repairing', 'Repairing this version’s offline files. Current forms and financial records are untouched.');
+  try {
+   const controller = navigator.serviceWorker.controller;
+   if (!controller || controller.scriptURL !== new URL('./sw.js', location.href).href) throw Error('controller');
+   const result = await ask(controller, 'REPAIR_STATIC');
+   if (controller !== navigator.serviceWorker.controller || result?.build !== BUILD) { show(status, 'mismatch', 'Repair reply belongs to another build. Finish work and reopen safely.'); return; }
+   if (result.state !== 'complete') {
+    show(status, 'failed', 'Same-build repair unavailable. The server may have newer files, be offline, or storage may be full. Check for updates to prepare a replacement; do not reload unfinished work.');
+    return;
+   }
+   await readiness();
+  } catch (_) { show(status, 'failed', 'Repair could not be confirmed. Keep online and retry; no financial records were cleared.'); }
+  finally { repairing = false; repair.disabled = false; }
+ }
+ retry.addEventListener('click', () => readiness());
+ update.addEventListener('click', checkUpdates);
+ repair.addEventListener('click', repairFiles);
+ if (!['http:', 'https:'].includes(location.protocol) || !window.isSecureContext || !('serviceWorker' in navigator) || !('caches' in window) || !window.MessageChannel) {
+  show(status, 'unsupported', 'Offline install unavailable here. Use a supported browser and trusted HTTPS (loopback is test-only).');
+  retry.disabled = update.disabled = repair.disabled = true; return;
+ }
+ document.addEventListener('visibilitychange', () => { if (!document.hidden && !repairing) void readiness(); });
+ navigator.serviceWorker.addEventListener('controllerchange', () => { void readiness(); });
+ show(updateStatus, 'idle', 'Check for updates while online. Updates never reload open work.');
+ void setup().then(readiness).catch(() => show(status, 'failed', 'Offline registration failed or timed out. Keep online and Check for updates to retry.'));
 })();
-
 </script>
 </body>
 </html>
